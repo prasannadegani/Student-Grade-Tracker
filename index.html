@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grade Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+    <h1>Student Grade Tracker</h1>
+
+ <input type="text" id="name" placeholder="Enter Student Name">
+
+<input type="number" id="maths" placeholder="Maths Marks">
+
+<input type="number" id="physics" placeholder="Physics Marks">
+
+<input type="number" id="chemistry" placeholder="Chemistry Marks">
+
+<input type="number" id="english" placeholder="English Marks">
+
+<input type="number" id="hindi" placeholder="hindi Marks">
+
+<input type="number" id="telugu" placeholder="Telugu Marks">
+
+<button onclick="calculateGrade()">Calculate Grade</button>
+
+<div id="result"></div>
+</div>
+<hr>
+
+<h2>Student Records</h2>
+
+<table id="studentTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Total</th>
+            <th>Average</th>
+            <th>Grade</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+
+    </tbody>
+</table>
+
+<script src="script.js"></script>
+
+</body>
+</html>
