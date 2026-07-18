@@ -6,49 +6,197 @@
     <title>Student Grade Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
-    <h1>Student Grade Tracker</h1>
+<header class="header">
+    <div>
+        <h1>Student Grade Tracker</h1>
+        <p>Track student performance and calculate grades easily</p>
+    </div>
+</header>
 
- <input type="text" id="name" placeholder="Enter Student Name">
+<main class="main-container">
 
-<input type="number" id="maths" placeholder="Maths Marks">
+    <!-- Dashboard Cards -->
+    <section class="dashboard">
 
-<input type="number" id="physics" placeholder="Physics Marks">
+        <div class="stat-card">
+            <p>Total Students</p>
+            <h2 id="totalStudents">0</h2>
+        </div>
 
-<input type="number" id="chemistry" placeholder="Chemistry Marks">
+        <div class="stat-card">
+            <p>Passed Students</p>
+            <h2 id="passedStudents">0</h2>
+        </div>
 
-<input type="number" id="english" placeholder="English Marks">
+        <div class="stat-card">
+            <p>Failed Students</p>
+            <h2 id="failedStudents">0</h2>
+        </div>
 
-<input type="number" id="hindi" placeholder="hindi Marks">
+        <div class="stat-card">
+            <p>Class Average</p>
+            <h2 id="classAverage">0%</h2>
+        </div>
 
-<input type="number" id="telugu" placeholder="Telugu Marks">
+    </section>
 
-<button onclick="calculateGrade()">Calculate Grade</button>
 
-<div id="result"></div>
-</div>
-<hr>
+    <section class="content">
 
-<h2>Student Records</h2>
+        <!-- Student Form -->
+        <div class="form-card">
 
-<table id="studentTable">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Total</th>
-            <th>Average</th>
-            <th>Grade</th>
-            <th>Status</th>
-            <th>Action</th>
-        </tr>
-    </thead>
+            <h2>Add Student Marks</h2>
+            <p class="subtitle">
+                Enter student details and subject marks
+            </p>
 
-    <tbody>
+            <label>Student Name</label>
+            <input
+                type="text"
+                id="name"
+                placeholder="Enter student name"
+            >
 
-    </tbody>
-</table>
+            <div class="subjects">
+
+                <div>
+                    <label>Maths</label>
+                    <input
+                        type="number"
+                        id="maths"
+                        placeholder="0 - 100"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+                <div>
+                    <label>Physics</label>
+                    <input
+                        type="number"
+                        id="physics"
+                        placeholder="0 - 100"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+                <div>
+                    <label>Chemistry</label>
+                    <input
+                        type="number"
+                        id="chemistry"
+                        placeholder="0 - 100"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+                <div>
+                    <label>English</label>
+                    <input
+                        type="number"
+                        id="english"
+                        placeholder="0 - 100"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+                <div>
+                    <label>Hindi</label>
+                    <input
+                        type="number"
+                        id="hindi"
+                        placeholder="0 - 100"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+                <div>
+                    <label>Telugu</label>
+                    <input
+                        type="number"
+                        id="telugu"
+                        placeholder="0 - 100"
+                        min="0"
+                        max="100"
+                    >
+                </div>
+
+            </div>
+
+            <button
+                class="calculate-btn"
+                onclick="calculateGrade()"
+            >
+                Calculate Grade
+            </button>
+
+            <div id="result" class="result-box">
+                <p>No result calculated yet.</p>
+            </div>
+
+        </div>
+
+
+        <!-- Student Records -->
+        <div class="records-card">
+
+            <div class="records-header">
+
+                <div>
+                    <h2>Student Records</h2>
+                    <p>View calculated student results</p>
+                </div>
+
+                <button
+                    class="clear-btn"
+                    onclick="clearAllRecords()"
+                >
+                    Clear All
+                </button>
+
+            </div>
+
+            <div class="table-container">
+
+                <table id="studentTable">
+
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Total</th>
+                            <th>Average</th>
+                            <th>Grade</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<footer>
+    <p>Student Grade Tracker</p>
+</footer>
+
 
 <script src="script.js"></script>
 
