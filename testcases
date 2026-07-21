@@ -1,0 +1,76 @@
+# Student Grade Tracker - Test Cases
+
+## Test Case 1: Valid Student Details
+**Input:** Student name and valid marks (0–100) for all subjects  
+**Expected Result:** Total, average, grade, and status should be calculated correctly.  
+**Status:** Pass
+
+## Test Case 2: Empty Student Name
+**Input:** Student name left empty  
+**Expected Result:** System should display an alert asking to enter all details.  
+**Status:** Pass
+
+## Test Case 3: Empty Subject Marks
+**Input:** One or more subject marks left empty  
+**Expected Result:** System should display a validation alert and should not calculate the grade.  
+**Status:** Pass
+
+## Test Case 4: Marks Greater Than 100
+**Input:** Enter marks greater than 100  
+**Expected Result:** System should display an alert that marks must be between 0 and 100.  
+**Status:** Pass
+
+## Test Case 5: Negative Marks
+**Input:** Enter marks below 0  
+**Expected Result:** System should reject the marks and display a validation alert.  
+**Status:** Pass
+
+## Test Case 6: A+ Grade Calculation
+**Input:** Average marks 90 or above  
+**Expected Result:** Grade should be A+ and status should be Pass.  
+**Status:** Pass
+
+## Test Case 7: A Grade Calculation
+**Input:** Average marks between 80 and 89.99  
+**Expected Result:** Grade should be A and status should be Pass.  
+**Status:** Pass
+
+## Test Case 8: B Grade Calculation
+**Input:** Average marks between 70 and 79.99  
+**Expected Result:** Grade should be B and status should be Pass.  
+**Status:** Pass
+
+## Test Case 9: C Grade Calculation
+**Input:** Average marks between 60 and 69.99  
+**Expected Result:** Grade should be C and status should be Pass.  
+**Status:** Pass
+
+## Test Case 10: D Grade Calculation
+**Input:** Average marks between 50 and 59.99  
+**Expected Result:** Grade should be D and status should be Pass.  
+**Status:** Pass
+
+## Test Case 11: Fail Result
+**Input:** Average marks below 50  
+**Expected Result:** Grade should be F and status should be Fail.  
+**Status:** Pass
+
+## Test Case 12: Student Record Display
+**Input:** Enter valid student details and click Calculate Grade  
+**Expected Result:** Student details should be added to the Student Records table.  
+**Status:** Pass
+
+## Test Case 13: Delete Student Record
+**Action:** Click the Delete button  
+**Expected Result:** Selected student record should be removed from the table.  
+**Status:** Pass
+
+## Test Case 14: Clear All Records
+**Action:** Click the Clear All button  
+**Expected Result:** All student records should be removed.  
+**Status:** Pass
+
+## Test Case 15: Dashboard Statistics
+**Action:** Add multiple student records  
+**Expected Result:** Total Students, Passed Students, Failed Students, and Class Average should update correctly.  
+**Status:** Pass
