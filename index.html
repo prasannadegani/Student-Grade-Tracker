@@ -1,70 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Student Grade Tracker</title>
+
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- HEADER -->
 <header class="header">
+
     <div>
-        <h1>Student Grade Tracker</h1>
-        <p>Track student performance and calculate grades easily</p>
+        <h1>🎓 Student Grade Tracker</h1>
+
+        <p>
+            Track student performance and calculate grades easily
+        </p>
     </div>
+
 </header>
+
 
 <main class="main-container">
 
-    <!-- Dashboard Cards -->
+
+    <!-- DASHBOARD -->
+
     <section class="dashboard">
 
-        <div class="stat-card">
+        <!-- TOTAL STUDENTS -->
+
+        <div class="stat-card total-card">
+
             <p>Total Students</p>
-            <h2 id="totalStudents">0</h2>
+
+            <h2 id="totalStudents">
+                0
+            </h2>
+
         </div>
 
-        <div class="stat-card">
+
+        <!-- PASSED STUDENTS -->
+
+        <div class="stat-card passed-card">
+
             <p>Passed Students</p>
-            <h2 id="passedStudents">0</h2>
+
+            <h2 id="passedStudents">
+                0
+            </h2>
+
         </div>
 
-        <div class="stat-card">
+
+        <!-- FAILED STUDENTS -->
+
+        <div class="stat-card failed-card">
+
             <p>Failed Students</p>
-            <h2 id="failedStudents">0</h2>
+
+            <h2 id="failedStudents">
+                0
+            </h2>
+
         </div>
 
-        <div class="stat-card">
+
+        <!-- CLASS AVERAGE -->
+
+        <div class="stat-card average-card">
+
             <p>Class Average</p>
-            <h2 id="classAverage">0%</h2>
+
+            <h2 id="classAverage">
+                0.00%
+            </h2>
+
+        </div>
+
+
+        <!-- TOP PERFORMER -->
+
+        <div class="stat-card topper-card">
+
+            <p>🏆 Top Performer</p>
+
+            <h2 id="topPerformer">
+                --
+            </h2>
+
         </div>
 
     </section>
 
 
+    <!-- MAIN CONTENT -->
+
     <section class="content">
 
-        <!-- Student Form -->
+
+        <!-- STUDENT FORM -->
+
         <div class="form-card">
 
-            <h2>Add Student Marks</h2>
+            <h2 id="formTitle">
+                Add Student Marks
+            </h2>
+
             <p class="subtitle">
                 Enter student details and subject marks
             </p>
 
-            <label>Student Name</label>
+
+            <!-- STUDENT NAME -->
+
+            <label>
+                Student Name
+            </label>
+
             <input
                 type="text"
                 id="name"
                 placeholder="Enter student name"
             >
 
+
+            <!-- SUBJECT MARKS -->
+
             <div class="subjects">
 
+
+                <!-- MATHS -->
+
                 <div>
-                    <label>Maths</label>
+
+                    <label>
+                        Maths
+                    </label>
+
                     <input
                         type="number"
                         id="maths"
@@ -72,10 +151,18 @@
                         min="0"
                         max="100"
                     >
+
                 </div>
 
+
+                <!-- PHYSICS -->
+
                 <div>
-                    <label>Physics</label>
+
+                    <label>
+                        Physics
+                    </label>
+
                     <input
                         type="number"
                         id="physics"
@@ -83,10 +170,18 @@
                         min="0"
                         max="100"
                     >
+
                 </div>
 
+
+                <!-- CHEMISTRY -->
+
                 <div>
-                    <label>Chemistry</label>
+
+                    <label>
+                        Chemistry
+                    </label>
+
                     <input
                         type="number"
                         id="chemistry"
@@ -94,10 +189,18 @@
                         min="0"
                         max="100"
                     >
+
                 </div>
 
+
+                <!-- ENGLISH -->
+
                 <div>
-                    <label>English</label>
+
+                    <label>
+                        English
+                    </label>
+
                     <input
                         type="number"
                         id="english"
@@ -105,10 +208,18 @@
                         min="0"
                         max="100"
                     >
+
                 </div>
 
+
+                <!-- HINDI -->
+
                 <div>
-                    <label>Hindi</label>
+
+                    <label>
+                        Hindi
+                    </label>
+
                     <input
                         type="number"
                         id="hindi"
@@ -116,10 +227,18 @@
                         min="0"
                         max="100"
                     >
+
                 </div>
 
+
+                <!-- TELUGU -->
+
                 <div>
-                    <label>Telugu</label>
+
+                    <label>
+                        Telugu
+                    </label>
+
                     <input
                         type="number"
                         id="telugu"
@@ -127,62 +246,195 @@
                         min="0"
                         max="100"
                     >
+
                 </div>
 
             </div>
 
+
+            <!-- CALCULATE / UPDATE BUTTON -->
+
             <button
+                id="calculateBtn"
                 class="calculate-btn"
                 onclick="calculateGrade()"
             >
+
                 Calculate Grade
+
             </button>
 
-            <div id="result" class="result-box">
-                <p>No result calculated yet.</p>
+
+            <!-- RESULT -->
+
+            <div
+                id="result"
+                class="result-box"
+            >
+
+                <p>
+                    No result calculated yet.
+                </p>
+
             </div>
 
         </div>
 
 
-        <!-- Student Records -->
+
+        <!-- STUDENT RECORDS -->
+
         <div class="records-card">
+
+
+            <!-- RECORD HEADER -->
 
             <div class="records-header">
 
                 <div>
-                    <h2>Student Records</h2>
-                    <p>View calculated student results</p>
+
+                    <h2>
+                        📋 Student Records
+                    </h2>
+
+                    <p>
+                        View and manage calculated student results
+                    </p>
+
                 </div>
 
-                <button
-                    class="clear-btn"
-                    onclick="clearAllRecords()"
-                >
-                    Clear All
-                </button>
+
+                <!-- RECORD ACTION BUTTONS -->
+
+                <div class="records-actions">
+
+                    <!-- DOWNLOAD CSV -->
+
+                    <button
+                        class="download-btn"
+                        onclick="downloadCSV()"
+                    >
+
+                        ⬇ Download CSV
+
+                    </button>
+
+
+                    <!-- CLEAR ALL -->
+
+                    <button
+                        class="clear-btn"
+                        onclick="clearAllRecords()"
+                    >
+
+                        Clear All
+
+                    </button>
+
+                </div>
 
             </div>
+
+
+            <!-- SEARCH AND FILTER -->
+
+            <div class="records-tools">
+
+
+                <!-- SEARCH -->
+
+                <input
+                    type="text"
+                    id="searchStudent"
+                    class="search-box"
+                    placeholder="🔍 Search student by name..."
+                    onkeyup="filterRecords()"
+                >
+
+
+                <!-- FILTER -->
+
+                <select
+                    id="statusFilter"
+                    class="filter-box"
+                    onchange="filterRecords()"
+                >
+
+                    <option value="All">
+                        All Students
+                    </option>
+
+                    <option value="Pass">
+                        Passed Students
+                    </option>
+
+                    <option value="Fail">
+                        Failed Students
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- TABLE -->
 
             <div class="table-container">
 
                 <table id="studentTable">
 
                     <thead>
+
                         <tr>
-                            <th>Name</th>
-                            <th>Total</th>
-                            <th>Average</th>
-                            <th>Grade</th>
-                            <th>Status</th>
-                            <th>Action</th>
+
+                            <th>
+                                Name
+                            </th>
+
+                            <th>
+                                Total
+                            </th>
+
+                            <th>
+                                Average
+                            </th>
+
+                            <th>
+                                Grade
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
                         </tr>
+
                     </thead>
 
+
                     <tbody>
+
+                        <!-- Student records appear here -->
+
                     </tbody>
 
                 </table>
+
+            </div>
+
+
+            <!-- EMPTY MESSAGE -->
+
+            <div
+                id="emptyMessage"
+                class="empty-message"
+            >
+
+                No student records available.
 
             </div>
 
@@ -193,12 +445,19 @@
 </main>
 
 
+<!-- FOOTER -->
+
 <footer>
-    <p>Student Grade Tracker</p>
+
+    <p>
+        © 2026 Student Grade Tracker
+    </p>
+
 </footer>
 
 
 <script src="script.js"></script>
 
 </body>
+
 </html>
