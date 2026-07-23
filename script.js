@@ -1,10 +1,13 @@
-let students = JSON.parse(localStorage.getItem("students")) || [];
+let students =
+    JSON.parse(localStorage.getItem("students")) || [];
 let editIndex = -1;
 function calculateGrade() {
-    const name = document
-        .getElementById("name")
-        .value
-        .trim();
+
+    const name =
+        document.getElementById("name")
+            .value
+            .trim();
+
     const inputIds = [
         "maths",
         "physics",
@@ -13,40 +16,51 @@ function calculateGrade() {
         "hindi",
         "telugu"
     ];
-    const emptyField = inputIds.some(
-        id => document.getElementById(id).value === ""
-    );
+    const emptyField =
+        inputIds.some(id =>
+            document.getElementById(id).value === ""
+        );
+
+
     if (name === "" || emptyField) {
 
         alert(
             "Please enter student name and all subject marks."
         );
+
         return;
     }
-    const marks = inputIds.map(
-        id => Number(
-            document.getElementById(id).value
-        )
-    );
-    if (
-        marks.some(
-            mark =>
-                isNaN(mark) ||
-                mark < 0 ||
-                mark > 100
-        )
-    ) {
+
+    const marks =
+        inputIds.map(id =>
+            Number(
+                document.getElementById(id).value
+            )
+        );
+    const invalidMarks =
+        marks.some(mark =>
+            isNaN(mark) ||
+            mark < 0 ||
+            mark > 100
+        );
+
+
+    if (invalidMarks) {
+
         alert(
             "Marks must be between 0 and 100."
         );
+
         return;
     }
+
     const duplicateIndex =
-        students.findIndex(
-            student =>
-                student.name.toLowerCase() ===
-                name.toLowerCase()
+        students.findIndex(student =>
+            student.name.toLowerCase() ===
+            name.toLowerCase()
         );
+
+
     if (
         duplicateIndex !== -1 &&
         duplicateIndex !== editIndex
@@ -58,6 +72,7 @@ function calculateGrade() {
 
         return;
     }
+
     const total =
         marks.reduce(
             (sum, mark) => sum + mark,
@@ -67,210 +82,350 @@ function calculateGrade() {
     const average =
         total / marks.length;
     let grade;
+
+
     if (average >= 90) {
+
         grade = "A+";
-    } else if (average >= 80) {
-        grade = "A";
-    } else if (average >= 70) {
-        grade = "B";
-    } else if (average >= 60) {
-        grade = "C";
-    } else if (average >= 50) {
-        grade = "D";
-    } else {
-        grade = "F";
+
     }
+
+    else if (average >= 80) {
+
+        grade = "A";
+
+    }
+
+    else if (average >= 70) {
+
+        grade = "B";
+
+    }
+
+    else if (average >= 60) {
+
+        grade = "C";
+
+    }
+
+    else if (average >= 50) {
+
+        grade = "D";
+
+    }
+
+    else {
+
+        grade = "F";
+
+    }
+
     const status =
         marks.every(mark => mark >= 35)
             ? "Pass"
             : "Fail";
+
     const student = {
+
         name: name,
+
         marks: marks,
+
         total: total,
+
         average: average,
+
         grade: grade,
+
         status: status
     };
+
     if (editIndex === -1) {
+
         students.push(student);
-    } else {
+
+    }
+
+    else {
+
         students[editIndex] = student;
+
         editIndex = -1;
+
+
         document.getElementById(
             "calculateBtn"
         ).textContent =
             "Calculate Grade";
+
+
         document.getElementById(
             "formTitle"
         ).textContent =
             "Add Student Marks";
     }
     saveStudents();
+
     displayResult(student);
+
     renderTable();
+
     updateDashboard();
+
     clearForm();
 }
+
 function displayResult(student) {
-    document.getElementById(
-        "result"
-    ).innerHTML = `
-        <h3>Student Result</h3>
-        <p>
-            <strong>Name:</strong>
-            ${student.name}
-        </p>
-        <p>
-            <strong>Total:</strong>
-            ${student.total} / 600
-        </p>
-        <p>
-            <strong>Average:</strong>
-            ${student.average.toFixed(2)}%
-        </p>
-        <p>
-            <strong>Grade:</strong>
-            ${student.grade}
-        </p>
-        <p>
-            <strong>Status:</strong>
-            ${student.status}
-        </p>
+
+    const result =
+        document.getElementById("result");
+
+
+    const statusClass =
+        student.status === "Pass"
+            ? "result-pass"
+            : "result-fail";
+
+
+    result.innerHTML = `
+
+        <div class="result-header">
+
+            <h3>
+                Student Result
+            </h3>
+
+            <span class="${statusClass}">
+                ${student.status}
+            </span>
+
+        </div>
+
+        <div class="result-details">
+
+            <p>
+                <strong>Name:</strong>
+                ${student.name}
+            </p>
+
+            <p>
+                <strong>Total:</strong>
+                ${student.total} / 600
+            </p>
+
+            <p>
+                <strong>Average:</strong>
+                ${student.average.toFixed(2)}%
+            </p>
+
+            <p>
+                <strong>Grade:</strong>
+                ${student.grade}
+            </p>
+
+        </div>
+
     `;
 }
+
 function renderTable() {
+
     const tableBody =
         document.querySelector(
             "#studentTable tbody"
         );
+
+
     tableBody.innerHTML = "";
+
     const searchInput =
         document.getElementById(
             "searchStudent"
         );
+
+
     const searchText =
         searchInput
             ? searchInput.value
                 .toLowerCase()
                 .trim()
             : "";
+
     const statusFilter =
         document.getElementById(
             "statusFilter"
         );
+
+
     const filterValue =
         statusFilter
             ? statusFilter.value
             : "All";
-    const sortedStudents =
-        [...students].sort(
-            (a, b) =>
-                b.average - a.average
-        );
-    const rankMap = new Map();
-    sortedStudents.forEach(
-        (student, index) => {
-            rankMap.set(
-                student,
-                index + 1
-            );
-        }
-    );
+
     const filteredStudents =
         students.filter(student => {
+
             const matchesSearch =
                 student.name
                     .toLowerCase()
                     .includes(searchText);
+
+
             const matchesStatus =
                 filterValue === "All" ||
-                student.status ===
-                    filterValue;
+                student.status === filterValue;
+
+
             return (
                 matchesSearch &&
                 matchesStatus
             );
+
         });
+
     const emptyMessage =
         document.getElementById(
             "emptyMessage"
         );
+
+
     if (filteredStudents.length === 0) {
+
         if (emptyMessage) {
+
             emptyMessage.style.display =
-                "block";
+                "flex";
+
         }
-    } else {
+
+    }
+
+    else {
+
         if (emptyMessage) {
+
             emptyMessage.style.display =
                 "none";
+
         }
+
     }
+
     filteredStudents.forEach(student => {
+
         const originalIndex =
             students.indexOf(student);
+
+
         const row =
             tableBody.insertRow();
+
+
         row.innerHTML = `
-            <td>
+
+            <td class="student-name">
+
                 ${student.name}
+
             </td>
+
+
             <td>
+
                 ${student.total}/600
+
             </td>
+
+
             <td>
+
                 ${student.average.toFixed(2)}%
+
             </td>
+
+
             <td>
-                <strong>
+
+                <span class="grade-badge">
+
                     ${student.grade}
-                </strong>
+
+                </span>
+
             </td>
+
+
             <td>
+
                 <span class="${
                     student.status === "Pass"
                         ? "pass-status"
                         : "fail-status"
                 }">
+
                     ${student.status}
+
                 </span>
+
             </td>
-            <td>
+
+
+            <td class="action-buttons">
+
                 <button
                     class="edit-btn"
                     onclick="editStudent(${originalIndex})"
                 >
+
                     Edit
+
                 </button>
+
+
                 <button
                     class="delete-btn"
                     onclick="deleteStudent(${originalIndex})"
                 >
+
                     Delete
+
                 </button>
+
             </td>
+
         `;
+
     });
 }
 function editStudent(index) {
     const student =
         students[index];
+    if (!student) {
+        return;
+    }
     editIndex = index;
     document.getElementById(
         "name"
     ).value =
         student.name;
     const inputIds = [
+
         "maths",
+
         "physics",
+
         "chemistry",
+
         "english",
+
         "hindi",
+
         "telugu"
+
     ];
     inputIds.forEach(
         (id, i) => {
+
             document.getElementById(
                 id
             ).value =
@@ -286,14 +441,21 @@ function editStudent(index) {
     ).textContent =
         "Edit Student Marks";
     window.scrollTo({
-        top: 300,
+        top: 200,
         behavior: "smooth"
     });
 }
 function deleteStudent(index) {
+    const student =
+        students[index];
+    if (!student) {
+        return;
+    }
     const confirmDelete =
         confirm(
-            "Are you sure you want to delete this student?"
+            "Are you sure you want to delete " +
+            student.name +
+            "?"
         );
     if (!confirmDelete) {
         return;
@@ -302,13 +464,28 @@ function deleteStudent(index) {
         index,
         1
     );
+    if (editIndex === index) {
+        editIndex = -1;
+        clearForm();
+        document.getElementById(
+            "calculateBtn"
+        ).textContent =
+            "Calculate Grade";
+        document.getElementById(
+            "formTitle"
+        ).textContent =
+            "Add Student Marks";
+    }
     saveStudents();
     renderTable();
     updateDashboard();
     document.getElementById(
         "result"
-    ).innerHTML =
-        "<p>No result calculated yet.</p>";
+    ).innerHTML = `
+        <p>
+            No result calculated yet.
+        </p>
+    `;
 }
 function clearAllRecords() {
     if (students.length === 0) {
@@ -319,7 +496,7 @@ function clearAllRecords() {
     }
     const confirmClear =
         confirm(
-            "Are you sure you want to clear all records?"
+            "Are you sure you want to clear all student records?"
         );
     if (!confirmClear) {
         return;
@@ -332,8 +509,11 @@ function clearAllRecords() {
     clearForm();
     document.getElementById(
         "result"
-    ).innerHTML =
-        "<p>No result calculated yet.</p>";
+    ).innerHTML = `
+        <p>
+            No result calculated yet.
+        </p>
+    `;
     document.getElementById(
         "calculateBtn"
     ).textContent =
@@ -361,8 +541,7 @@ function updateDashboard() {
         const totalAverage =
             students.reduce(
                 (sum, student) =>
-                    sum +
-                    student.average,
+                    sum + student.average,
                 0
             );
         classAverage =
@@ -384,8 +563,7 @@ function updateDashboard() {
     document.getElementById(
         "classAverage"
     ).textContent =
-        classAverage.toFixed(2) +
-        "%";
+        classAverage.toFixed(2) + "%";
     const topPerformer =
         document.getElementById(
             "topPerformer"
@@ -394,7 +572,8 @@ function updateDashboard() {
         if (students.length === 0) {
             topPerformer.textContent =
                 "--";
-        } else 
+        }
+        else {
             const topper =
                 students.reduce(
                     (best, student) =>
@@ -404,20 +583,17 @@ function updateDashboard() {
                             : best
                 );
             topPerformer.innerHTML = `
-
-                ${topper.name}
-
-                <br>
-
-                (${topper.average.toFixed(2)}%)
-
+                <span class="topper-name">
+                    ${topper.name}
+                </span>
+                <small>
+                    ${topper.average.toFixed(2)}%
+                </small>
             `;
         }
     }
 }
-
 function filterRecords() {
-
     renderTable();
 }
 function downloadCSV() {
@@ -425,14 +601,18 @@ function downloadCSV() {
         alert(
             "No student records available to download."
         );
-
         return;
     }
     let csvContent =
         "Name,Maths,Physics,Chemistry,English,Hindi,Telugu,Total,Average,Grade,Status\n";
     students.forEach(student => {
+        const safeName =
+            student.name.replace(
+                /"/g,
+                '""'
+            );
         csvContent +=
-            `"${student.name}",` +
+            `"${safeName}",` +
             student.marks.join(",") +
             "," +
             student.total +
@@ -456,7 +636,8 @@ function downloadCSV() {
         URL.createObjectURL(blob);
     const link =
         document.createElement("a");
-    link.href = url;
+    link.href =
+        url;
     link.download =
         "student_grade_records.csv";
     document.body.appendChild(
@@ -466,7 +647,9 @@ function downloadCSV() {
     document.body.removeChild(
         link
     );
-    URL.revokeObjectURL(url);
+    URL.revokeObjectURL(
+        url
+    );
 }
 function saveStudents() {
     localStorage.setItem(
